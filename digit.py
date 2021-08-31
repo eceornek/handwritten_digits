@@ -1,16 +1,9 @@
 import os
-
 import torch
 from torch import nn
 from torch.utils.data import Dataset, DataLoader, Subset
 from torchvision import transforms
-from torchvision.io import read_image
-from torchvision.transforms import ToTensor, Lambda
 from PIL import Image
-import matplotlib.pyplot as plt
-import numpy as np
-
-import pandas as pd
 
 class HandwrittenDigitsDataset(Dataset):
     def __init__(self, labels_file, images, transform=None, target_transform=None):
@@ -25,7 +18,6 @@ class HandwrittenDigitsDataset(Dataset):
 
     def __getitem__(self, index):
         img_path = os.path.join(self.images, f"{index}.png")
-        # image = read_image(img_path)
         image = Image.open(img_path)
         label = self.labels[index]
         if self.transform:
